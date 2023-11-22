@@ -34,6 +34,9 @@ const Feedback = () => {
     };
   }, [windowSize]);
 
+  useEffect(() => {
+    setWindowSize([window.innerWidth, window.innerHeight]);
+  }, []);
   const translateX = useTransform(scrollYProgress, [0, 1], ["35%", "-100%"]);
 
   // fetch https://randomuser.me/api/?results=10&inc=name,nat=US&noinfo
@@ -71,7 +74,13 @@ const Feedback = () => {
         translateX: trasX,
       }}
       className={
-        windowSize[0] >= 768
+        // windowSize[0] >= 768
+        //   ? ""
+        //   : "overflow-x-scroll w-full custom-scrollbar snap-x snap-mandatory"
+        // check window size is undefined
+        windowSize[0] === undefined
+          ? ""
+          : windowSize[0] >= 768
           ? ""
           : "overflow-x-scroll w-full custom-scrollbar snap-x snap-mandatory"
       }
