@@ -2,59 +2,37 @@
 import { Card, CardHeader, CardDescription, CardContent } from "./ui/card";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import useSize from "./useSize";
+
 import AvatarIcon from "./assets/AvatarIcon";
 const Feedback = () => {
+  const [isClient, setIsClient] = useState(false);
   const [names, setNames] = useState([]);
   const [trasX, setTrasX] = useState(0);
-  const windowSize = useSize();
-  let comentarios = [
-    {
-      name: "John Doe",
-      review:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cumque vel saepe dolorem ipsum consequuntur maxime quas sunt unde dolore eveniet illo incidunt, ea delectus iure, consequatur officiis temporibus nihil!",
-    },
-    {
-      name: "Jane Doe",
-      review:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cumque vel saepe dolorem ipsum consequuntur maxime quas sunt unde dolore eveniet illo incidunt, ea delectus iure, consequatur officiis temporibus nihil!",
-    },
-    {
-      name: "John Doe 3",
-      review:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cumque vel saepe dolorem ipsum consequuntur maxime quas sunt unde dolore eveniet illo incidunt, ea delectus iure, consequatur officiis temporibus nihil!",
-    },
-    {
-      name: "John Doe 4",
-      review:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cumque vel saepe dolorem ipsum consequuntur maxime quas sunt unde dolore eveniet illo incidunt, ea delectus iure, consequatur officiis temporibus nihil!",
-    },
-    {
-      name: "John Doe 5",
-      review:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cumque vel saepe dolorem ipsum consequuntur maxime quas sunt unde dolore eveniet illo incidunt, ea delectus iure, consequatur officiis temporibus nihil!",
-    },
-    {
-      name: "John Doe 6",
-      review:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cumque vel saepe dolorem ipsum consequuntur maxime quas sunt unde dolore eveniet illo incidunt, ea delectus iure, consequatur officiis temporibus nihil!",
-    },
-    {
-      name: "John Doe 7",
-      review:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cumque vel saepe dolorem ipsum consequuntur maxime quas sunt unde dolore eveniet illo incidunt, ea delectus iure, consequatur officiis temporibus nihil!",
-    },
-    {
-      name: "John Doe 8",
-      review:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cumque vel saepe dolorem ipsum consequuntur maxime quas sunt unde dolore eveniet illo incidunt, ea delectus iure, consequatur officiis temporibus nihil!",
-    },
-  ];
+  const [windowSize, setWindowSize] = useState([
+    isClient ? window.innerWidth : undefined,
+    isClient ? window.innerHeight : undefined,
+  ]);
+
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    const windowSizeHandler = () => {
+      setWindowSize([window.innerWidth, window.innerHeight]);
+    };
+    window.addEventListener("resize", windowSizeHandler);
+
+    return () => {
+      window.removeEventListener("resize", windowSizeHandler);
+    };
+  }, [windowSize]);
 
   const translateX = useTransform(scrollYProgress, [0, 1], ["35%", "-100%"]);
 
