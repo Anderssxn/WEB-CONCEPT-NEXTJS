@@ -1,13 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 const useSize = () => {
+  let isClient = typeof window === "object";
+
   const [windowSize, setWindowSize] = useState([
-    window.innerWidth,
-    window.innerHeight,
+    isClient ? window.innerWidth : undefined,
+    isClient ? window.innerHeight : undefined,
   ]);
 
   useEffect(() => {
-    // wait until window is loaded
     const windowSizeHandler = () => {
       setWindowSize([window.innerWidth, window.innerHeight]);
     };

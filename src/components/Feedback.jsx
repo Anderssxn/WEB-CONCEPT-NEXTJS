@@ -1,12 +1,6 @@
 "use client";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "./ui/card";
-import { motion, useScroll, useTransform, useVelocity } from "framer-motion";
+import { Card, CardHeader, CardDescription, CardContent } from "./ui/card";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import useSize from "./useSize";
 import AvatarIcon from "./assets/AvatarIcon";
@@ -14,7 +8,6 @@ const Feedback = () => {
   const [names, setNames] = useState([]);
   const [trasX, setTrasX] = useState(0);
   const windowSize = useSize();
-  const initialized = useRef(false);
   let comentarios = [
     {
       name: "John Doe",
