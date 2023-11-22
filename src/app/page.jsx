@@ -7,7 +7,7 @@ import Contacto from "@/components/sections/contacto/Contacto";
 export default function page() {
   return (
     <main className=" w-full flex p-12 flex-col items-center justify-center mt-[5rem]">
-      <div className="w-full flex  flex-col gap-12  ">
+      <div className="w-full flex  flex-col gap-[6rem]  ">
         <Home />
         <SobreNosotros />
         <Servicios />
